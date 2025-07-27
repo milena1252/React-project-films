@@ -1,0 +1,26 @@
+.search {
+    margin-bottom: 24px;
+}
+
+.search__group {
+    display: flex;
+    flex-direction: column;
+    gap:16px;
+}
+
+.search__input {
+    flex-grow: 1;
+    padding: 8px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+
+.search__select {
+    padding: 8px 16px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+}
+
+.search__btn {
+    padding: 8px 24px;
+}

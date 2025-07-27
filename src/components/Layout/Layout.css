@@ -1,0 +1,135 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+  color: #e0e0e0;
+  position: relative;
+}
+
+.layout__content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  z-index: 2;
+}
+
+.layout__main {
+  flex: 1;
+  padding: 30px 40px;
+  background: #292828;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+}
+
+.layout__main::-webkit-scrollbar {
+  width: 8px;
+}
+
+.layout__main::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.layout__main::-webkit-scrollbar-thumb {
+  background: rgba(255, 50, 50, 0.5);
+  border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+  .cinema-layout {
+    flex-direction: column;
+  }
+  
+  .cinema-main {
+    margin: 10px;
+  }
+}
+
+.sidebar {
+  width: 180px;
+  background: #292828;
+  padding: 30px 0;
+  top: 0;
+  z-index: 10;
+}
+
+.sidebar__nav {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0 20px;
+}
+
+.sidebar__link {
+  color: #b0b0b0;
+  text-decoration: none;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  font-size: 16px;
+}
+
+.sidebar__link:hover {
+  background-color: rgba(255,255,255,0.1);
+  transform: translateX(5px);
+}
+
+.sidebar__link.active {
+  background: linear-gradient(90deg, rgba(255, 50, 50, 0.2), transparent);
+  color: #fff;
+  border-left: 3px solid #ff3232;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: #292828;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.header__search {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.auth-section {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.username {
+  font-weight: 500;
+}
+
+.login-btn, .logout-btn {
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.login-btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+}
+
+.logout-btn {
+  background-color: #f8f8f8;
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+}
+
