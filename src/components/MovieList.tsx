@@ -63,11 +63,11 @@ export const MovieList = () => {
                     ))}
                 </div>
                 
-                {totalResults > 10 && (
+                {totalResults > 8 && (
                     <div className="movies__pagination">
                         <Pagination 
                             totalItems={totalResults} 
-                            itemsPerPage={10}
+                            itemsPerPage={8}
                             currentPage={currentPage}
                             />
                     </div>

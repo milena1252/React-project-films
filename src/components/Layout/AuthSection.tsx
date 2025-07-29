@@ -1,6 +1,7 @@
 import { logout, openAuthModal } from "../../store/authSlice";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import './Layout.css';
+import { IoMdLogIn } from "react-icons/io";
 
 export const AuthSection =() => {
     const dispatch = useAppDispatch();
@@ -23,7 +24,8 @@ export const AuthSection =() => {
                         onClick={() => dispatch(openAuthModal())}
                         className="login-btn"
                     >
-                        Login
+                        <IoMdLogIn  className="login-icon"/> 
+                        Log In
                     </button>
                 )}
         </div>

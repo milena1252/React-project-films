@@ -1,28 +1,81 @@
 .movie__card {
-    background: white;
-    border-radius: 8px;
+    position: relative;
+    background: #1e1e2e;
+    border-radius: 10px;
     overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.movie__card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
 }
 
 .movie__poster {
     width: 100%;
-    height: 260px;
+    height: 350px;
     object-fit: cover;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .movie__info {
-    padding: 16px;
+    padding: 15px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .movie__title {
     font-size: 18px;
-    margin-bottom: 8px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    margin: 0 0 8px 0;
+    color: #fff;
+    min-height: 44px;;
 }
 
 .movie__meta {
     display: flex;
     justify-content: space-between;
-    font-size: 15px;
+    margin-top: auto;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.85rem;
+}
+
+.favorite-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.7);
+    border: none;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+.favorite-btn:hover {
+    background: rgba(255, 50, 50, 0.9);
+    transform: scale(1.1);
+}
+
+.favorite-btn.active {
+    color: #ff3232;
+}
+
+.movie__poster[src*="placeholder.jpg"] {
+    background: #2a2a3a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255, 255, 255, 0.3);
+    font-size: 0.9rem;
 }

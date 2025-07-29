@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from "../store/store";
 import { resetMovieDetails, selectMovie } from "../store/movieSlice";
 import { useEffect } from "react";
 import { fetchMovieById } from "../store/movieThunk";
+import './MovieDetails.css';
 
 export const MovieDetails = () => {
     const {id} = useParams<{id: string}>();

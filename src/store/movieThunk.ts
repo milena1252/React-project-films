@@ -8,6 +8,7 @@ export const fetchMovies = createAsyncThunk(
   async (_, {getState}) => {
     const state = getState() as RootState;
     const { searchQuery, filters, currentPage } = state.movie;
+
     if (!searchQuery.trim()) return { Search: [], totalResults: '0'};
 
     const response = await axios.get (
@@ -20,7 +21,10 @@ export const fetchMovies = createAsyncThunk(
           type: filters.type,
         },
       });
-      return response.data;
+      return {
+        ...response.data,
+        Search: (response.data.Search || []).slice(0, 8)
+      };
     }
 );
  
