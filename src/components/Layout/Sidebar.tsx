@@ -4,7 +4,6 @@ import { IoHomeOutline } from "react-icons/io5";
 import { GoSearch } from "react-icons/go";
 import { MdFavoriteBorder } from "react-icons/md";
 
-
  export const Sidebar = () => {
    
     return (
