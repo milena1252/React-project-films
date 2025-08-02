@@ -3,9 +3,9 @@ import './Layout.css';
 import { IoHomeOutline } from "react-icons/io5";
 import { GoSearch } from "react-icons/go";
 import { MdFavoriteBorder } from "react-icons/md";
+import { AiFillSetting } from "react-icons/ai";
 
- export const Sidebar = () => {
-   
+export const Sidebar = () => {
     return (
         <aside className="sidebar">
             <nav className="sidebar__nav">
@@ -20,11 +20,12 @@ import { MdFavoriteBorder } from "react-icons/md";
                 <Link to="/favorites" className="sidebar__link">
                     <MdFavoriteBorder />
                     <span>Favorites</span>
-                </Link>                        
+                </Link>
+                <Link to="/settings" className="sidebar__link">
+                    <AiFillSetting />
+                    <span>Settings</span>
+                </Link>
             </nav>
         </aside>
     );
- };
- 
- 
- 
+};

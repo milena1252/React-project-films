@@ -3,15 +3,10 @@ import { useAppDispatch } from "../store/store";
 import { fetchMovies } from "../store/movieThunk";
 import { setSearchQuery } from "../store/movieSlice";
 import { MovieList } from "../components/MovieList";
+import './HomePage.css';
 
 export const HomePage = () => {
     const dispatch = useAppDispatch();
-    
-    // //при загрузке стр выполняем поиск по попул фильмам
-    // useEffect(() => {
-    //     dispatch(setSearchQuery('2025'));
-    //     dispatch(fetchMovies());
-    // }, [dispatch]);
 
     useEffect(() => {
         const popularQueries = ['avengers', 'batman', 'superhero', 'action'];

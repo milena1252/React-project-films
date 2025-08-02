@@ -12,13 +12,13 @@
 
 @media (max-width: 1024px) {
   .movies__grid {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 768px) {
   .movies__grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
 }
 
@@ -36,7 +36,7 @@
     height: 50px;
     border: 5px solid rgba(0, 0, 0, 0.1);
     border-radius: 50%;
-    border-top-color: #ff3232;
+    border-top-color: #9d4edd;
     animation: spin 1s ease-in-out infinite;
     margin-bottom: 15px;
 }

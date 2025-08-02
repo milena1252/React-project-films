@@ -51,9 +51,9 @@
 }
 
 .pagination__page-active {
-    background-color: #2563eb;
+    background-color: #9d4edd;
     color: white;
-    border-color: #2563eb;
+    border-color: #9d4edd;
 }
 
 .pagination__ellipsis {
