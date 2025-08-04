@@ -14,7 +14,7 @@ export const FavoritesPage = () => {
    if (!isAuth) {
     return (
         <div className="auth-required">
-            <h2 className="auth-title">Favorites <GrFavorite style={{fontSize: '36px', color: 'red'}}/> </h2>
+            <h2 className="auth-title">Favorites</h2>
             <div className="auth-message">
                 <p>Please <button 
                         onClick={() => dispatch(openAuthModal())}

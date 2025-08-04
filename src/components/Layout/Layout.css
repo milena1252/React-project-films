@@ -4,6 +4,13 @@
   min-height: 100vh;
   color: #e0e0e0;
   position: relative;
+  /* background: #292828; */
+  background-image: url('/src/assets/forma_svet_fon_85573_1280x720.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+ 
 }
 
 .layout__container {
@@ -15,14 +22,24 @@
   flex: 1;
   padding: 30px 40px;
   margin-left: 180px;
-  background: #292828;
+  /* background: #292828; */
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
-  /* width: 100%; */
+  background: transparent;
+}
+
+@media (max-width: 457px) {
+  .layout__main{
+    background-image: url('/src/assets/forma_svet_fon_85573_1280x720.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+  }
 }
 
 .sidebar {
   width: 180px;
-  background: #292828;
+  /* background: #292828; */
   padding: 20px 0;
   position: absolute;
   top: 83px;
@@ -67,7 +84,7 @@
   align-items: center;
   gap: 10px;
   padding: 20px 40px;
-  background: #292828;
+  /* background: #292828; */
   position: sticky;
   top: 0;
   z-index: 5;
@@ -94,6 +111,7 @@
 
 .header__logo span {
   background: linear-gradient(90deg, #9d4edd, #c77dff);
+  /* background: #00ffff; */
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent; 
@@ -292,6 +310,7 @@
 
 .username svg {
   color: #c77dff; 
+  /* color: #00ffff; */
   font-size: 16px;
 }
 
@@ -299,6 +318,7 @@
     background: linear-gradient(135deg, rgba(157, 78, 221, 0.2) 0%, rgba(106, 17, 203, 0.2) 100%);
     color: whitesmoke;
     border: 1px solid #9d4edd;
+    /* border: 1px solid #00ffff; */
     padding: 8px 16px;
     border-radius: 30px;
     font-size: 14px;
@@ -319,6 +339,47 @@
     padding: 4px;
     font-size: 12px;
   }
+
+  .header__logo{
+    margin-right: 0;
+    font-size: 16px;
+    letter-spacing: 1px;
+  }
+
+  .username {
+  font-size: 12px;
+  gap: 4px;
+  letter-spacing: 0.5px;
+}
+
+  .username svg {
+    font-size: 14px;
+  }
+
+  .search__button svg {
+  font-size: 14px;
+}
+
+.user-menu {
+  gap: 8px;
+}
+
+.burger-menu {
+    font-size: 20x;
+    margin-right: 8px
+}
+
+  .mobile-nav {
+    width: 200px;
+    top: 95px;
+    left: 65px;
+  }
+
+  .mobile-nav__link {
+    font-size: 16px;
+    padding: 12px;
+  }
+
 }
 
 .login-btn:hover {
@@ -365,7 +426,8 @@
 
 @media (max-width: 465px) {
   .logout-btn {
-    padding: 8px;
+    padding: 6px;
+    font-size: 12px;
   }
 }
 
