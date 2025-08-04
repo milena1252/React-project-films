@@ -1,27 +1,31 @@
 import { Link } from "react-router";
 import './Layout.css';
+import { IoHomeOutline } from "react-icons/io5";
+import { GoSearch } from "react-icons/go";
+import { MdFavoriteBorder } from "react-icons/md";
+import { AiFillSetting } from "react-icons/ai";
 
- export const Sidebar = () => {
-   
+export const Sidebar = () => {
     return (
         <aside className="sidebar">
             <nav className="sidebar__nav">
                 <Link to="/" className="sidebar__link">
-                    <span className="sidebar-icon">🏠</span>
+                    <IoHomeOutline />
                     <span>Home</span>
                 </Link>
                 <Link to="/search" className="sidebar__link">
-                    <span className="sidebar-icon">🔍</span>
+                    <GoSearch />
                     <span>Search</span>
                 </Link>
                 <Link to="/favorites" className="sidebar__link">
-                    <span className="sidebar-icon">❤️</span>
+                    <MdFavoriteBorder />
                     <span>Favorites</span>
-                </Link>                        
+                </Link>
+                <Link to="/settings" className="sidebar__link">
+                    <AiFillSetting />
+                    <span>Settings</span>
+                </Link>
             </nav>
         </aside>
     );
- };
- 
- 
- 
+};

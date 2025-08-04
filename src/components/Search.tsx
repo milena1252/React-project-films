@@ -28,9 +28,11 @@ export const Search = () => {
                 value={searchQuery}
                 onChange={(event) => dispatch(setSearchQuery(event.target.value))}
                 placeholder="Search movies..."
-                className="search__input"
+                className="search__inp"
                 />
-                <select 
+
+                <div className="search__select-group">
+                    <select 
                 value={filters.year}
                 onChange={(event) => dispatch(setYearFilter(event.target.value))}
                 className="search__select"
@@ -53,12 +55,16 @@ export const Search = () => {
                     <option value="game">Game</option>
                 </select>
 
-                <button 
+                 <button 
                 type="submit"
                 className="search__btn"
                 >
                     Search
                 </button>
+                </div>
+                
+
+               
             </div>
         </form>
     );

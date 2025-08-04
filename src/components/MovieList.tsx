@@ -17,13 +17,12 @@ export const MovieList = () => {
         currentPage
     } = useAppSelector(selectMovie);
 
-    //автомат-ки загр фильмы при изм-ии параметров
-    useEffect (() => {
-        if (searchQuery.trim() !== '')
-        {
+    useEffect(() => {
+        // Автозагрузка только для страницы поиска
+        if (window.location.pathname === '/search' && searchQuery.trim() !== '') {
             dispatch(fetchMovies());
         }
-    }, [dispatch, searchQuery,currentPage]);
+    }, [dispatch, searchQuery, currentPage]);
 
     if (isLoading) {
         return (
@@ -63,11 +62,11 @@ export const MovieList = () => {
                     ))}
                 </div>
                 
-                {totalResults > 10 && (
+                {totalResults > 8 && (
                     <div className="movies__pagination">
                         <Pagination 
                             totalItems={totalResults} 
-                            itemsPerPage={10}
+                            itemsPerPage={8}
                             currentPage={currentPage}
                             />
                     </div>

@@ -103,6 +103,7 @@ export const{
     resetMovieDetails,
 } = movieSlice.actions;
 
-export const selectMovie = (state: RootState) => state.movie;
+export const selectMovie = (state: RootState) => state.movie
+export const movieReducer = movieSlice.reducer; 
 
 export default movieSlice.reducer;

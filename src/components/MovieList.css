@@ -6,9 +6,20 @@
 
 .movies__grid {
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 24px;
-    padding: 0 16px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .movies__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .movies__grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 .movies__loading {
@@ -16,8 +27,8 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 300px;
-    gap: 16px;
+    height: 300px;
+    color: rgba(255, 255, 255, 0.7);
 }
 
 .spinner {
@@ -25,8 +36,9 @@
     height: 50px;
     border: 5px solid rgba(0, 0, 0, 0.1);
     border-radius: 50%;
-    border-top-color: #2563eb;
+    border-top-color: #9d4edd;
     animation: spin 1s ease-in-out infinite;
+    margin-bottom: 15px;
 }
 
 @keyframes spin {
@@ -34,31 +46,33 @@
 }
 
 .movies__error {
-    text-align: center;
-    padding: 32px;
-    color: #dc2626;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: #ff3232;
 }
 
 .retry-button {
-    margin-top: 16px;
-    padding: 8px 16px;
-    background-color: #2563ed;
-    color: white;
-    border: none;
+    margin-top: 15px;
+    padding: 8px 20px;
+    background: rgba(255, 50, 50, 0.2);
+    color: #fff;
+    border: 1px solid #ff3232;
     border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: all 0.2s;
 }
 
 .retry-button:hover {
-    background-color: #1d4ed8;
+    background: rgba(255, 50, 50, 0.4);
 }
 
 .movies__empty {
     text-align: center;
-    padding: 32px;
-    font-size: 18px;
-    color: #575757;
+    padding: 50px 0;
+    color: rgba(255, 255, 255, 0.5);
 }
 
 .movies__pagination {

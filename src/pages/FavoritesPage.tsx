@@ -1,31 +1,44 @@
+import { IoLogInOutline } from "react-icons/io5";
 import { FavoriteList } from "../components/FavoritesList";
+import { openAuthModal } from "../store/authSlice";
 import { selectFavorites } from "../store/favoritesSlice";
 import { useAppDispatch, useAppSelector } from "../store/store";
-import { AuthModal } from "../components/Layout/AuthModal";
-import { openAuthModal } from "../store/authSlice";
+import './FavoritesPage.css';
+import { GrFavorite } from "react-icons/gr";
 
 export const FavoritesPage = () => {
     const favorites = useAppSelector(selectFavorites);
     const {isAuth} = useAppSelector((state) => state.auth);
-    const dispatch = useAppDispatch();
-
+     const dispatch = useAppDispatch();
+   
+   if (!isAuth) {
     return (
-        <div className="favorites">
-            {!isAuth && <AuthModal/>}
-            <h2>Your Favorite Movies</h2>
-        {isAuth ? (
-            favorites.length > 0 ? (
-            <FavoriteList movies={favorites} />
-        ) : (
-            <p>You don't have any favorite movies yet.</p>
-        )
-      ) : (
-            <p className="login-prompt">
-                Please 
-                <button onClick={() => dispatch(openAuthModal())}>log in</button>
-                to view your favorites.
-            </p>
-      )}
-    </div>
+        <div className="auth-required">
+            <h2 className="auth-title">Favorites</h2>
+            <div className="auth-message">
+                <p>Please <button 
+                        onClick={() => dispatch(openAuthModal())}
+                        className="login-button"
+                    >
+                        <IoLogInOutline style={{ marginRight: '8px' }} />
+                        Log In
+                    </button> 
+                to view your favorites</p>         
+            </div>
+        </div>
     );
+   }
+
+   return (
+        <div className="favorites-page">
+            <h2 className="favorites-title">Your Favorite Movies</h2>
+            {favorites.length > 0 ? (
+                <FavoriteList movies={favorites}/>
+            ) : (
+                <p className="favorites-empty">
+                   You don't have any favorite movies yet. 
+                </p>
+            )}
+        </div>
+   );
 };

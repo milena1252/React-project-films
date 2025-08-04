@@ -7,9 +7,9 @@ import { AuthModal } from "./AuthModal";
 export const Layout = ({children = true}: PropsWithChildren) => {
     return (
         <div className="layout">
-            <Sidebar/>
-            <div className="layout__content">
-                <Header/>
+             <Header/>
+            <div className="layout__container">
+                <Sidebar/>
                 <main className="layout__main">
                     {children}
                 </main>

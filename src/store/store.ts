@@ -10,10 +10,7 @@ export const store = configureStore ({
         auth: authReducer,
         favorites: favoritesReducer,
     },
-    // middleware: (getDefaultMiddleWare) =>
-    //     getDefaultMiddleWare({
-    //         serializableCheck: false,  //для игнорирования Date в MovieFull
-    //     }),
+    
 });
 
 export type RootState = ReturnType<typeof store.getState>;

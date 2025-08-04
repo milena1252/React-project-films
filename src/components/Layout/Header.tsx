@@ -1,29 +1,86 @@
+import { Link, useNavigate } from "react-router";
 import { AuthSection } from "./AuthSection";
 import './Layout.css';
+import { IoHomeOutline, IoMenu, IoSearchOutline } from "react-icons/io5";
+import { useAppDispatch, useAppSelector } from "../../store/store";
+import { selectMovie, setSearchQuery } from "../../store/movieSlice";
+import { useState, type ChangeEvent, type FormEvent } from "react";
+import { fetchMovies } from "../../store/movieThunk";
+import { AiFillSetting } from "react-icons/ai";
+import { MdFavoriteBorder } from "react-icons/md";
+import { GoSearch } from "react-icons/go";
 
-interface Headerrops {
+interface HeaderProps {
     showSearch?: boolean;
 }
 
-export const Header = ({showSearch = true}: Headerrops) => {
+export const Header = ({showSearch = true}: HeaderProps) => {
+    const [isMobileOpen, setIsMobileOpen] = useState(false);
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const { searchQuery } = useAppSelector(selectMovie);
+
+    const handleSubmit = (event: FormEvent) => {
+        event.preventDefault();
+        if (searchQuery.trim()) {
+            dispatch(fetchMovies());
+            navigate('/search');
+        }
+    };
+
+    const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+        dispatch(setSearchQuery(event.target.value))
+    };
   
     return (
+        <>
         <header className="header">
+            <button
+                className="burger-menu"
+                onClick={() => setIsMobileOpen(!isMobileOpen)}
+            >
+                <IoMenu size={24} /> 
+            </button>
+
+            <Link to="/" className="header__logo">
+                <span>PIX</span>EMA
+            </Link>
+            
             {showSearch && (
-                <div className="search__container">
+                <form onSubmit={handleSubmit} className="search__container">
                     <input 
                         type="text" 
+                        value={searchQuery}
+                        onChange={handleChange}
                         placeholder="Search movies..."
                         className="search__input"
                     />
-                    <button className="search__button">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                            <path d="M15.5 15H14.71L14.43 14.73C15.41 13.59 16 12.11 16 10.5C16 6.91 13.09 4 9.5 4C5.91 4 3 6.91 3 10.5C3 14.09 5.91 17 9.5 17C11.11 17 12.59 16.41 13.73 15.43L14 15.71V16.5L19 21.49L20.49 20L15.5 15Z" fill="currentColor"/>
-                        </svg>
+                    <button type="submit" className="search__button">
+                        <IoSearchOutline />
                     </button>
-                </div>
+                </form>
             )}
             <AuthSection/>
         </header>
+
+         <nav className={`mobile-nav ${isMobileOpen ? 'open' : ''}`}>
+                <Link to="/" className="mobile-nav__link" onClick={() => setIsMobileOpen(false)}>
+                    <IoHomeOutline />
+                    <span>Home</span>
+                </Link>
+                <Link to="/search" className="mobile-nav__link" onClick={() => setIsMobileOpen(false)}>
+                    <GoSearch />
+                    <span>Search</span>
+                </Link>
+                <Link to="/favorites" className="mobile-nav__link" onClick={() => setIsMobileOpen(false)}>
+                    <MdFavoriteBorder />
+                    <span>Favorites</span>
+                </Link>
+                <Link to="/settings" className="mobile-nav__link" onClick={() => setIsMobileOpen(false)}>
+                    <AiFillSetting />
+                    <span>Settings</span>
+                </Link>
+            </nav>
+        </>        
     );
 };
