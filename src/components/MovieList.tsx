@@ -51,7 +51,7 @@ export const MovieList = () => {
         <div className="movies__container">
             {movies.length === 0 ? (
                 <div className="movies__empty">
-                    <p> No movie found. Try a different search.</p>
+                    <p> No movies found. Try a different search.</p>
                 </div>
                 
             ) : (

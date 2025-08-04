@@ -7,6 +7,7 @@ import { SearchPage } from './pages/SearchPage';
 import { PrivateRoute } from './routes/PrivateRoute';
 import { FavoritesPage } from './pages/FavoritesPage';
 import { SettingsPage } from './pages/SettingsPage';
+import NotFound from './pages/NotFoutd';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
             </PrivateRoute>
           }/>
           <Route path='settings' element={<SettingsPage/>}/>
+          <Route path='*' element={<NotFound />}/> 
         </Routes>
       </Layout>
   );
