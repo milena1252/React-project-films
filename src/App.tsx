@@ -21,7 +21,11 @@ function App() {
               <FavoritesPage/>
             </PrivateRoute>
           }/>
-          <Route path='settings' element={<SettingsPage/>}/>
+          <Route path='/settings' element={
+            <PrivateRoute>
+              <SettingsPage/>
+            </PrivateRoute>
+          }/>
           <Route path='*' element={<NotFound />}/> 
         </Routes>
       </Layout>

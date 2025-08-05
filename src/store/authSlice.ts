@@ -1,6 +1,6 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 
-interface AuthState {
+export interface AuthState {
     isAuth: boolean;
     username: string | null;
     isAuthModalOpen: boolean;
@@ -8,8 +8,8 @@ interface AuthState {
 }
 
 const initialState: AuthState = {
-    isAuth: !!localStorage.getItem('movieAppUsername'),
-    username: localStorage.getItem('movieAppUsername'),
+    isAuth: !!localStorage.getItem('auth'),
+    username: localStorage.getItem('auth') ? JSON.parse(localStorage.getItem('auth') || '').username : null,
     isAuthModalOpen: false,
     authError: null
 };

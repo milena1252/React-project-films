@@ -10,6 +10,7 @@ export const MovieDetails = () => {
     const {id} = useParams<{id: string}>();
     const dispatch = useAppDispatch();
     const {currentMovie, isLoading, error} = useAppSelector(selectMovie);
+    const showRatings = useAppSelector(state => state.settings.showRating);
 
     useEffect (() => {
         if (id) {
@@ -79,7 +80,7 @@ export const MovieDetails = () => {
                         <div>
                             <div className="details__ratings">
                                 <span>IMDb</span>
-                                <span>{currentMovie.imdbRating}/10</span>
+                                {showRatings && <span>{currentMovie.imdbRating}/10</span>}
                             </div>
                             <div>
                                 <span>{currentMovie.imdbVotes} votes</span>

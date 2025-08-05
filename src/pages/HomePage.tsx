@@ -9,9 +9,9 @@ export const HomePage = () => {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
-        const popularQueries = ['avengers', 'batman', 'superhero', 'action'];
+        const popularQueries = ['avengers', 'batman', 'superhero', 'action'];//популярные запросы
+        //выбор случайного запроса
         const randomQuery = popularQueries[Math.floor(Math.random() * popularQueries.length)];
-  
         dispatch(setSearchQuery(randomQuery));
         dispatch(fetchMovies());
     }, [dispatch]);

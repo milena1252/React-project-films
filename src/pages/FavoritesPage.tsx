@@ -4,7 +4,6 @@ import { openAuthModal } from "../store/authSlice";
 import { selectFavorites } from "../store/favoritesSlice";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import './FavoritesPage.css';
-import { GrFavorite } from "react-icons/gr";
 
 export const FavoritesPage = () => {
     const favorites = useAppSelector(selectFavorites);

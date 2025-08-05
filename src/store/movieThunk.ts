@@ -9,8 +9,10 @@ export const fetchMovies = createAsyncThunk(
     const state = getState() as RootState;
     const { searchQuery, filters, currentPage } = state.movie;
 
+    // Если поисковый запрос пустой, возвращаем пустой результат
     if (!searchQuery.trim()) return { Search: [], totalResults: '0'};
 
+    try{
     const response = await axios.get (
       BASE_URL, {
         params: {
@@ -25,13 +27,18 @@ export const fetchMovies = createAsyncThunk(
         ...response.data,
         Search: (response.data.Search || []).slice(0, 8)
       };
+    } catch(error) {
+      console.error('Error:', error);
+      throw error; // Просто пробрасываем ошибку дальше
     }
+  }
 );
  
 export const fetchMovieById = createAsyncThunk(
     'movies/fetchMovieById',
   async (id: string) => {
-    const response = await axios.get (BASE_URL, {
+    try{
+      const response = await axios.get (BASE_URL, {
         params: {
           apikey: API_KEY,
           i: id,
@@ -39,5 +46,9 @@ export const fetchMovieById = createAsyncThunk(
         }
       });
       return response.data;
+      } catch(error) {
+        console.error('Error:', error)
+        throw error; 
+      }
     }
 );

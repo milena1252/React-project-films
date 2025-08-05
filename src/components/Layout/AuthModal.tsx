@@ -47,7 +47,7 @@ export const AuthModal = () => {
                         minLength={6}
                         />
                     </div>
-                        <button type="submit" className="login-btn">Login</button>
+                        <button type="submit" className="login-btn-auth">Login</button>
                 </form>
             </div>
         </div>

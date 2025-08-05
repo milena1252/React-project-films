@@ -1,7 +1,7 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
 import type { MovieShort } from "../types/types";
 
-interface FavoriteState {
+export interface FavoriteState {
     movies: MovieShort[];
 }
 
@@ -23,9 +23,12 @@ export const favoritesSlice = createSlice({
             state.movies = state.movies.filter(movie => movie.imdbID !== action.payload);
             localStorage.setItem('favorites', JSON.stringify(state.movies));
         },
+        clearFavorites: (state) => {
+            state.movies = [];
+        },
     },
 });
 
-export const {addFavorite, removeFavorite} = favoritesSlice.actions;
+export const {addFavorite, removeFavorite, clearFavorites} = favoritesSlice.actions;
 export const selectFavorites = (state: {favorites: FavoriteState}) => state.favorites.movies;
 export default favoritesSlice.reducer;
