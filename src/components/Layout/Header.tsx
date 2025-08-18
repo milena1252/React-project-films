@@ -1,42 +1,60 @@
 import { Link, useNavigate } from "react-router";
 import { AuthSection } from "./AuthSection";
 import './Layout.css';
-import { IoHomeOutline, IoMenu, IoSearchOutline } from "react-icons/io5";
+import { IoMenu, IoSearchOutline } from "react-icons/io5";
 import { useAppDispatch, useAppSelector } from "../../store/store";
 import { selectMovie, setSearchQuery } from "../../store/movieSlice";
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useState, type ChangeEvent } from "react";
 import { fetchMovies } from "../../store/movieThunk";
 import { AiFillSetting } from "react-icons/ai";
 import { MdFavoriteBorder } from "react-icons/md";
 import { GoSearch } from "react-icons/go";
+import useDebounce from "../../hooks/useDebounce";
+import { useWindow } from "../../hooks/useWindow";
 
-interface HeaderProps {
-    showSearch?: boolean;
-}
+const popularQueries = ['avengers', 'batman', 'superhero', 'action'];//популярные запросы
+const randomQuery = popularQueries[Math.floor(Math.random() * popularQueries.length)];
 
-export const Header = ({showSearch = true}: HeaderProps) => {
+export const Header = () => {
+    const { isLg } = useWindow();
     const [isMobileOpen, setIsMobileOpen] = useState(false);
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const { searchQuery } = useAppSelector(selectMovie);
-
-    const handleSubmit = (event: FormEvent) => {
-        event.preventDefault();
-        if (searchQuery.trim()) {
-            dispatch(fetchMovies());
-            navigate('/search');
-        }
-    };
+    const { searchQuery, filters } = useAppSelector(selectMovie);
+    const debouncedSearchQuery = useDebounce(searchQuery, 2000);
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         dispatch(setSearchQuery(event.target.value))
     };
+
+    useEffect(() => {
+        if (isLg) {
+            if (!searchQuery) {
+                //выбор случайного запроса
+                dispatch(setSearchQuery(randomQuery));
+            }
+        }
+    }, [dispatch, searchQuery, isLg]);
+
+    // Эффект для автоматического поиска при изменении debounced значения
+    useEffect(() => {
+        if (isLg) {
+        // Выполняем поиск только если есть поисковый запрос
+            if (debouncedSearchQuery) {
+                dispatch(fetchMovies({ searchQuery: debouncedSearchQuery, filters }));
+                if (window.location.pathname !== '/') {
+                    navigate('/');
+                }
+            }
+        }
+    }, [debouncedSearchQuery, dispatch, filters, navigate, isLg]);
   
     return (
         <>
         <header className="header">
             <button
                 className="burger-menu"
+                data-testid="burger-menu-btn"
                 onClick={() => setIsMobileOpen(!isMobileOpen)}
             >
                 <IoMenu size={24} /> 
@@ -46,29 +64,26 @@ export const Header = ({showSearch = true}: HeaderProps) => {
                 <span>PIX</span>EMA
             </Link>
             
-            {showSearch && (
-                <form onSubmit={handleSubmit} className="search__container">
+            {isLg && (
+                <div className="search__container">
                     <input 
                         type="text" 
                         value={searchQuery}
                         onChange={handleChange}
                         placeholder="Search movies..."
                         className="search__input"
+                        data-testid="search-input"
                     />
-                    <button type="submit" className="search__button">
+                    <button className="search__button" data-testid="search-outline">
                         <IoSearchOutline />
                     </button>
-                </form>
+                </div>
             )}
             <AuthSection/>
         </header>
 
          <nav className={`mobile-nav ${isMobileOpen ? 'open' : ''}`}>
                 <Link to="/" className="mobile-nav__link" onClick={() => setIsMobileOpen(false)}>
-                    <IoHomeOutline />
-                    <span>Home</span>
-                </Link>
-                <Link to="/search" className="mobile-nav__link" onClick={() => setIsMobileOpen(false)}>
                     <GoSearch />
                     <span>Search</span>
                 </Link>

@@ -11,7 +11,7 @@ export default function useDebounce<T>(value: T, delay: number) {
         return () => {
             clearTimeout(handler);
         };
-    }, [value]);
+    }, [delay, value]);
 
     return debouncedValue;
 }

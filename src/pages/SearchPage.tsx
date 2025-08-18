@@ -1,6 +1,5 @@
 import { MovieList } from "../components/MovieList";
 import { Search } from "../components/Search";
-import './HomePage.css';
 
 export const SearchPage = () => {
     return (

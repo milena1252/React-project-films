@@ -3,11 +3,19 @@ import { API_KEY, BASE_URL } from "../constants/api";
 import type { RootState } from "./store";
 import axios from "axios";
 
+interface FetchMoviesParams {
+    searchQuery: string,
+    filters?: {
+      year: string;
+      type: string;
+    }
+}
+
 export const fetchMovies = createAsyncThunk(
   'movies/fetchMovies',
-  async (_, {getState}) => {
+  async ({ searchQuery, filters }: FetchMoviesParams, {getState}) => {
     const state = getState() as RootState;
-    const { searchQuery, filters, currentPage } = state.movie;
+    const { currentPage } = state.movie;
 
     // Если поисковый запрос пустой, возвращаем пустой результат
     if (!searchQuery.trim()) return { Search: [], totalResults: '0'};
@@ -19,8 +27,8 @@ export const fetchMovies = createAsyncThunk(
           apikey: API_KEY,
           s: searchQuery,
           page: currentPage,
-          y: filters.year,
-          type: filters.type,
+          y: filters?.year,
+          type: filters?.type,
         },
       });
       return {
