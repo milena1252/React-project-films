@@ -50,6 +50,12 @@ const movieSlice = createSlice ({
         resetMovieDetails: (state) => {
             state.currentMovie = null;
         },
+        resetSearch: (state) => {
+            state.searchQuery = '';
+            state.movies = [];
+            state.totalResults = 0;
+            state.currentPage = 1;
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -101,6 +107,7 @@ export const{
     setTypeFilter,
     setPage,
     resetMovieDetails,
+    resetSearch
 } = movieSlice.actions;
 
 export const selectMovie = (state: RootState) => state.movie

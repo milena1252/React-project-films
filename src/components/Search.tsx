@@ -1,14 +1,16 @@
-import { useEffect, type FormEvent } from "react";
+import { useEffect } from "react";
 import { selectMovie, setSearchQuery, setTypeFilter, setYearFilter } from "../store/movieSlice";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { fetchMovies } from "../store/movieThunk";
 import './Search.css'
 import { useNavigate } from "react-router";
 import useDebounce from "../hooks/useDebounce";
+import { useWindow } from "../hooks/useWindow";
 
 export const Search = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const { isSm } = useWindow();
     //Достаем из store: поисковый запрос и фильтры
     const {searchQuery, filters} = useAppSelector(selectMovie);
 
@@ -17,28 +19,20 @@ export const Search = () => {
 
     // Эффект для автоматического поиска при изменении debounced значения
     useEffect(() => {
-        // Выполняем поиск только если есть поисковый запрос
-        if (debouncedSearchQuery) {
-            dispatch(fetchMovies());
-            if (window.location.pathname !== '/search') {
-            navigate('/search');
+        if (isSm) {
+            if (debouncedSearchQuery) {
+                dispatch(fetchMovies({ searchQuery: debouncedSearchQuery, filters }));
+                if (window.location.pathname !== '/') {
+                    navigate('/');
+                }
             }
         }
-    }, [debouncedSearchQuery, dispatch, navigate]);
+    // Выполняем поиск только если есть поисковый запрос
 
-    // Обработчик отправки формы (при нажатии Enter или кнопки Search)
-    const handleSubmit = (event: FormEvent) => {
-        event.preventDefault();
-        // Выполняем поиск
-        dispatch(fetchMovies());
-        //перенапр на стр поиска, если мы не на ней
-        if (window.location.pathname !== '/search') {
-        navigate('/search');
-        }
-    };
+    }, [debouncedSearchQuery, dispatch, filters, isSm, navigate]);
 
     return (
-        <form onSubmit={handleSubmit} className="search">
+        <div className="search">
             <div className="search__group">
                 <input 
                 type="text" 
@@ -80,11 +74,8 @@ export const Search = () => {
                 >
                     Search
                 </button>
-                </div>
-                
-
-               
+                </div>  
             </div>
-        </form>
+        </div>
     );
 };

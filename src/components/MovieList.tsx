@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { selectMovie } from "../store/movieSlice";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { MovieCard } from "./MovieCard";
@@ -13,16 +12,10 @@ export const MovieList = () => {
         isLoading, 
         error, 
         totalResults, 
-        searchQuery, 
+        searchQuery,
+        filters, 
         currentPage
     } = useAppSelector(selectMovie);
-
-    useEffect(() => {
-        // Автозагрузка только для страницы поиска
-        if (window.location.pathname === '/search' && searchQuery.trim() !== '') {
-            dispatch(fetchMovies());
-        }
-    }, [dispatch, searchQuery, currentPage]);
 
     if (isLoading) {
         return (
@@ -38,7 +31,7 @@ export const MovieList = () => {
             <div className="movies__error">
                 <p>Error:{error}</p>
                 <button
-                    onClick={() => dispatch(fetchMovies())}
+                    onClick={() => dispatch(fetchMovies({searchQuery, filters}))}
                     className="retry-button"
                 >
                         Try Again

@@ -1,6 +1,6 @@
 import { logout, openAuthModal } from "../../store/authSlice";
 import { useAppDispatch, useAppSelector } from "../../store/store";
-import './Layout.css';
+import '../Layout/Layout.css';
 import { IoMdLogIn } from "react-icons/io";
 import { FaRegUser } from "react-icons/fa";
 

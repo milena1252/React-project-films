@@ -1,9 +1,6 @@
-import { fireEvent, render, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
-import { MemoryRouter } from "react-router";
-import { store } from "../store/store";
+import { screen } from "@testing-library/react";
 import App from "../App";
-import { Header } from "../components/Layout/Header";
+
 
 describe("App routing", () => {
     //рендерим App с нач путем
