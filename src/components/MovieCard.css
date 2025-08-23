@@ -56,13 +56,13 @@
 }
 
 .movie__year {
-    color: #c77dff;
+    color: #00ffff;
     font-weight: 500;
 }
 
 .movie__type {
     background: rgba(157, 78, 221, 0.2);
-    color: #c77dff;
+    color: #00ffff;
     padding: 3px 8px;
     border-radius: 4px;
     text-transform: capitalize;
@@ -87,6 +87,7 @@
     transition: all 0.2s ease;
     backdrop-filter: blur(5px);
     z-index: 2;
+    transition: all 0.3s ease;
 }
 
 .favorite-btn:hover {
@@ -95,6 +96,13 @@
     transform: scale(1.1);
     border-color: transparent;
     box-shadow: 0 0 15px rgba(255, 50, 50, 0.5);
+}
+
+.favorite-btn.active {
+    color: #ff3232; 
+    background: rgba(255, 50, 50, 0.2);
+    border: 1px solid rgba(255, 50, 50, 0.3);
+    text-shadow: 0 0 10px rgba(255, 50, 50, 0.7);
 }
 
 .favorite-btn.active:hover {

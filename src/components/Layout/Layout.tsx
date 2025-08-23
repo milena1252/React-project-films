@@ -2,9 +2,10 @@ import type { PropsWithChildren } from "react";
 import './Layout.css';
 import { Sidebar } from "./Sidebar";
 import { Header } from "./Header";
-import { AuthModal } from "./AuthModal";
+import { AuthModal } from "../Auth/AuthModal";
 
 export const Layout = ({children = true}: PropsWithChildren) => {
+
     return (
         <div className="layout">
              <Header/>

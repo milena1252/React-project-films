@@ -1,6 +1,6 @@
-import { setPage } from "../store/movieSlice";
+import { selectMovie, setPage } from "../store/movieSlice";
 import { fetchMovies } from "../store/movieThunk";
-import { useAppDispatch } from "../store/store";
+import { useAppDispatch, useAppSelector } from "../store/store";
 import './Pagination.css';
 
 interface PaginationProps {
@@ -12,12 +12,13 @@ interface PaginationProps {
 export const Pagination = ({ totalItems, itemsPerPage, currentPage }: PaginationProps) => {
     const dispatch = useAppDispatch();
 
-    const totalPages = Math.ceil(totalItems / itemsPerPage); 
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
+    const {searchQuery, filters} = useAppSelector(selectMovie);
 
     const handlePageChange = (page: number) => {
         if (page < 1 || page > totalPages) return;
         dispatch(setPage(page));
-        dispatch(fetchMovies());
+        dispatch(fetchMovies({searchQuery, filters}));
         window.scrollTo({ top: 0, behavior: 'smooth'});
     };
 

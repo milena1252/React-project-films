@@ -21,8 +21,7 @@
     transform: translateX(-50%);
     width: 80px;
     height: 3px;
-    background: linear-gradient(90deg, #9d4edd, #c77dff);
-    /* background: #00ffff; */
+    background: #00ffff;
     border-radius: 3px;
 }
 

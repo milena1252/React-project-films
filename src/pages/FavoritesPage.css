@@ -1,5 +1,5 @@
 .favorites-page, .auth-required {
-    padding: 40px;
+    padding: 20px;
     text-align: center;
     margin: 0 auto;
     color: #e0e0e0;
@@ -34,7 +34,7 @@
 
 .login-button {
     background: none;
-    color: #ca7cd6;
+    color: #00ffff;
     border: none;
     padding: 12px;
     font-size: 32px;

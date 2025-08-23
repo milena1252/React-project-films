@@ -1,31 +1,43 @@
-import type { FormEvent } from "react";
+import { useEffect } from "react";
 import { selectMovie, setSearchQuery, setTypeFilter, setYearFilter } from "../store/movieSlice";
 import { useAppDispatch, useAppSelector } from "../store/store";
 import { fetchMovies } from "../store/movieThunk";
 import './Search.css'
 import { useNavigate } from "react-router";
+import useDebounce from "../hooks/useDebounce";
+import { useWindow } from "../hooks/useWindow";
 
 export const Search = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
+    const { isSm } = useWindow();
+    //Достаем из store: поисковый запрос и фильтры
     const {searchQuery, filters} = useAppSelector(selectMovie);
 
-    const handleSubmit = (event: FormEvent) => {
-        event.preventDefault();
-        dispatch(fetchMovies());
+    //Добавляем debounce для searchQuery
+    const debouncedSearchQuery = useDebounce(searchQuery, 500);
 
-        //перенапр на стр поиска, если мы не на ней
-        if (window.location.pathname !== '/search') {
-        navigate('/search');
+    // Эффект для автоматического поиска при изменении debounced значения
+    useEffect(() => {
+        if (isSm) {
+            if (debouncedSearchQuery) {
+                dispatch(fetchMovies({ searchQuery: debouncedSearchQuery, filters }));
+                if (window.location.pathname !== '/') {
+                    navigate('/');
+                }
+            }
         }
-    };
+    // Выполняем поиск только если есть поисковый запрос
+
+    }, [debouncedSearchQuery, dispatch, filters, isSm, navigate]);
 
     return (
-        <form onSubmit={handleSubmit} className="search">
+        <div className="search">
             <div className="search__group">
                 <input 
                 type="text" 
-                value={searchQuery}
+                value={searchQuery} // Связываем со значением из store
+                // Обновляем store при изменении
                 onChange={(event) => dispatch(setSearchQuery(event.target.value))}
                 placeholder="Search movies..."
                 className="search__inp"
@@ -38,6 +50,7 @@ export const Search = () => {
                 className="search__select"
                 >
                     <option value="">All years</option>
+                     {/* Генерируем список последних 50 лет */}
                     {Array.from({length: 50 }, (_, i) => new Date().getFullYear() - i).map(year => 
                         ( 
                             <option key={year} value={year}>{year}</option>
@@ -61,11 +74,8 @@ export const Search = () => {
                 >
                     Search
                 </button>
-                </div>
-                
-
-               
+                </div>  
             </div>
-        </form>
+        </div>
     );
 };

@@ -15,7 +15,7 @@
     display: none;
     flex-grow: 1;
     padding: 8px 16px;
-    border: 1px solid rgba(157, 78, 221, 0.3);
+    border: 1px solid #64a1a1;
     border-radius: 16px;
     background: rgba(255, 255, 255, 0.1);
     color: whitesmoke;
@@ -26,8 +26,8 @@
 
 .search__inp:hover,
 .search__inp:focus {
-    border-color: #9d4edd;
-    box-shadow: 0 0 0 2px rgba(157, 78, 221, 0.2);
+    border-color: #00ffff;
+    box-shadow: 0 0 0 2px #;
     outline: none;
 }
 
@@ -54,7 +54,7 @@
 }
 
 .search__select:hover {
-    border-color: #9d4edd;
+    border-color: #00ffff;
 }
 
 .search__select:focus {
@@ -70,7 +70,8 @@
 
 .search__btn {
     padding: 8px 32px;
-    background: linear-gradient(135deg, #9d4edd 0%, #6a11cb 100%);
+    background: linear-gradient(to bottom, #00ffff 0%, rgba(42,139,242,0.1) 100%);
+    backdrop-filter: blur(5px);
     color: white;
     border: 1px solid #e5e7eb;
     border-radius: 30px;
@@ -83,7 +84,7 @@
 
 .search__btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(157, 78, 221, 0.4);
+    box-shadow: 0 5px 15px rgba(69, 228, 236, 0.4);
 }
 
 @media (max-width: 768px) {
