@@ -18,6 +18,9 @@ export const Pagination = ({ totalItems, itemsPerPage, currentPage }: Pagination
     const handlePageChange = (page: number) => {
         if (page < 1 || page > totalPages) return;
         dispatch(setPage(page));
+        if (searchQuery) {
+            dispatch(fetchMovies({searchQuery, filters, page}));
+        }
         dispatch(fetchMovies({searchQuery, filters}));
         window.scrollTo({ top: 0, behavior: 'smooth'});
     };
