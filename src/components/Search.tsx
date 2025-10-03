@@ -21,7 +21,7 @@ export const Search = () => {
     useEffect(() => {
         if (isSm) {
             if (debouncedSearchQuery) {
-                dispatch(fetchMovies({ searchQuery: debouncedSearchQuery, filters }));
+                dispatch(fetchMovies({ searchQuery: debouncedSearchQuery, filters, page: 1 }));
                 if (window.location.pathname !== '/') {
                     navigate('/');
                 }

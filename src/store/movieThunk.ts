@@ -8,14 +8,16 @@ interface FetchMoviesParams {
   filters?: {
     year: string;
     type: string;
-  }
+  };
+  page?: number;
 }
 
 export const fetchMovies = createAsyncThunk(
   'movies/fetchMovies',
-  async ({searchQuery, filters}: FetchMoviesParams, {getState}) => {
+  async ({searchQuery, filters, page}: FetchMoviesParams, {getState}) => {
     const state = getState() as RootState;
-    const { currentPage } = state.movie;
+
+    const targetPage = page !== undefined ? page : state.movie.currentPage;
 
     // Если поисковый запрос пустой, возвращаем пустой результат
     if (!searchQuery.trim()) return { Search: [], totalResults: '0'};
@@ -26,14 +28,20 @@ export const fetchMovies = createAsyncThunk(
         params: {
           apikey: API_KEY,
           s: searchQuery,
-          page: currentPage,
+          page: targetPage,
           y: filters?.year,
           type: filters?.type,
         },
       });
+
+      if (response.data.Error) {
+        throw new Error(response.data.Error);
+      }
+
       return {
         ...response.data,
-        Search: (response.data.Search || []).slice(0, 8)
+        Search: (response.data.Search || []).slice(0, 8),
+        currentPage: targetPage,
       };
     } catch(error) {
       console.error('Error:', error);
@@ -53,6 +61,11 @@ export const fetchMovieById = createAsyncThunk(
           plot: 'full'
         }
       });
+
+      if (response.data.Error) {
+        throw new Error(response.data.Error);
+      }
+
       return response.data;
       } catch(error) {
         console.error('Error:', error)

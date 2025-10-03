@@ -13,7 +13,6 @@ import { useWindow } from "../../hooks/useWindow";
 import useDebounce from "../../hooks/useDebounce";
 
 const popularQueries = ['avengers', 'batman', 'superhero', 'action']; //популярные запросы
-const randomQuery = popularQueries[Math.floor(Math.random() * popularQueries.length)];
 
 export const Header = () => {
     const { isLg } = useWindow();
@@ -22,7 +21,12 @@ export const Header = () => {
     const navigate = useNavigate();
     const location = useLocation();
     const { searchQuery, filters } = useAppSelector(selectMovie);
-    const debouncedSearchQuery = useDebounce(searchQuery, 2000);
+    const debounceTime = isLg ? 2000 : 800;
+    const debouncedSearchQuery = useDebounce(searchQuery, debounceTime);
+
+    const getRandomQuery = () => {
+        return popularQueries[Math.floor(Math.random() * popularQueries.length)];
+    };
 
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         dispatch(setSearchQuery(event.target.value))
@@ -35,39 +39,38 @@ export const Header = () => {
 
     // Функция для очистки поля поиска
     const handleClearSearch = () => {
-        dispatch(setSearchQuery(randomQuery));
+        const newRandomQuery = getRandomQuery();
+        dispatch(setSearchQuery(newRandomQuery));
         dispatch(fetchMovies({
-            searchQuery: randomQuery,
-            filters
+            searchQuery: newRandomQuery,
+            filters,
+            page: 1
         }));
     };
 
     //обработчик для ручного поиска
     const handleSearchSubmit = () => {
         if (searchQuery) {
-            dispatch(fetchMovies({ searchQuery, filters }));
+            dispatch(fetchMovies({ searchQuery, filters, page: 1 }));
             if (location.pathname !== '/') {
                 navigate('/')
             }
         }
     };
 
+    // автопоиск ТОЛЬКО на главной странице
     useEffect(() => {
-        if (isLg) {
-                //выбор случайного запроса
-                dispatch(setSearchQuery(randomQuery));
-        }
-    }, [dispatch, isLg]);
-
-      // автопоиск ТОЛЬКО на главной странице
-    useEffect(() => {
-        if (isLg && location.pathname === '/') {
+        if (location.pathname === '/') {
         // Выполняем поиск только если есть поисковый запрос
             if (debouncedSearchQuery) {
-                dispatch(fetchMovies({ searchQuery: debouncedSearchQuery, filters }));
+                dispatch(fetchMovies({ searchQuery: debouncedSearchQuery, filters, page: 1 }));
+            } else {
+                const newRandomQuery = getRandomQuery();
+                dispatch(setSearchQuery(newRandomQuery));
+                dispatch(fetchMovies({searchQuery: newRandomQuery, filters, page: 1}));
             }
         }
-    }, [debouncedSearchQuery, dispatch, filters, isLg, location.pathname]);
+    }, [debouncedSearchQuery, dispatch, filters, location.pathname]);
 
     // Эффект для сброса поиска при переходе на другие страницы
     useEffect(() => {
@@ -91,7 +94,6 @@ export const Header = () => {
                 <span>PIX</span>EMA
             </Link>
             
-            {isLg && (
                 <div className="search__container">
                     <input 
                         type="text" 
@@ -117,7 +119,7 @@ export const Header = () => {
                         </button>
                     )}
                 </div>
-            )}
+
             <AuthSection/>
         </header>
 
