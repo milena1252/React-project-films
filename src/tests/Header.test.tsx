@@ -1,4 +1,4 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import { Header } from "../components/Layout/Header";
 import { renderWithProviders } from "./utils";
 

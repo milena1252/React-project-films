@@ -1,6 +1,6 @@
 import { FavoriteList } from "../components/FavoritesList";
 import { selectFavorites } from "../store/favoritesSlice";
-import { useAppDispatch, useAppSelector } from "../store/store";
+import { useAppSelector } from "../store/store";
 import './FavoritesPage.css';
 
 export const FavoritesPage = () => {
