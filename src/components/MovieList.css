@@ -1,0 +1,83 @@
+.movies__container {
+    padding: 32px 0;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.movies__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+}
+
+@media (max-width: 1024px) {
+  .movies__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .movies__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.movies__loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 300px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(0, 0, 0, 0.1);
+    border-radius: 50%;
+    border-top-color: #9d4edd;
+    animation: spin 1s ease-in-out infinite;
+    margin-bottom: 15px;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg);}
+}
+
+.movies__error {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: #ff3232;
+}
+
+.retry-button {
+    margin-top: 15px;
+    padding: 8px 20px;
+    background: rgba(255, 50, 50, 0.2);
+    color: #fff;
+    border: 1px solid #ff3232;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.retry-button:hover {
+    background: rgba(255, 50, 50, 0.4);
+}
+
+.movies__empty {
+    text-align: center;
+    padding: 50px 0;
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.movies__pagination {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+}
+

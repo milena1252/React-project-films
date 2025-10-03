@@ -1,0 +1,135 @@
+.favorites-page, .auth-required {
+    padding: 20px;
+    text-align: center;
+    margin: 0 auto;
+    color: #e0e0e0;
+}
+
+.auth-title {
+    font-size: 44px;
+    margin-bottom: 30px;
+    color: #e0e0e0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    letter-spacing: 1px;
+}
+
+.auth-message {
+    padding: 44px;
+    margin: 32px auto;
+    max-width: 800px;
+    background: rgba(10, 25, 47, 0.7);
+    border-radius: 16px;
+    border: 1px solid rgba(100, 255, 218, 0.2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+
+}
+
+.auth-message p {
+    font-size: 32px;
+    margin: 0;
+}
+
+.login-button {
+    background: none;
+    color: #00ffff;
+    border: none;
+    padding: 12px;
+    font-size: 32px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    margin: 0 10px;
+    border-radius: 8px;
+}
+
+.login-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(164, 59, 63, 0.3);
+}
+
+.favorites-title {
+    font-size: 44px;
+    color: #e0e0e0;
+    margin-bottom: 40px;
+}
+
+.favorites-empty {
+    font-size: 24px;
+    color: #ccd6f6;
+    padding: 40px;
+    background: rgba(10, 25, 47, 0.5);
+    border-radius: 12px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+    .auth-title {
+    font-size: 36px;
+    }
+
+    .auth-message p {
+        font-size: 24px;
+    }
+
+    .login-button {
+    font-size: 20px;
+    }
+
+
+}
+
+@media (max-width: 768px) {
+    .auth-title {
+    font-size: 32px;
+    }
+
+    .auth-message {
+    padding: 20px;
+    }
+
+    .auth-message p {
+        font-size: 20px;
+       
+    }
+
+}
+
+@media (max-width: 410px) {
+    .auth-title {
+    font-size: 24px;
+    }
+
+    .auth-message {
+    padding: 0;
+    }
+
+    .auth-message p {
+        font-size: 18px;
+    }
+
+    .login-button {
+    font-size: 16px;
+    }
+
+}
+
+@media (max-width: 453px) {
+    .auth-required {
+        margin-top: 70px;
+    }
+
+    .auth-required {
+        width: 300px;
+    }
+}
+
+@media (max-width: 502px) {
+    .favorites-title {
+       margin-top: 40px;
+    }
+}
